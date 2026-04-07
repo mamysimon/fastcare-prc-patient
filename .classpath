@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.mule.tooling.API_SPEC_LIB/43c948fb-024c-4176-a702-879840dedb82/patient-process-api/1.0.2"/>
+	<classpathentry kind="con" path="org.mule.tooling.API_SPEC_LIB/43c948fb-024c-4176-a702-879840dedb82/patient-process-api/1.0.3"/>
+	<classpathentry kind="con" path="MULE_LIB/43c948fb-024c-4176-a702-879840dedb82/mule-plugin-sftp-system-api/1.0.3"/>
+	<classpathentry kind="con" path="MULE_LIB/43c948fb-024c-4176-a702-879840dedb82/mule-plugin-database-system-api/1.0.6"/>
 	<classpathentry kind="con" path="MULE_LIB/org.mule.connectors/mule-sockets-connector/1.2.7"/>
 	<classpathentry kind="con" path="org.mule.tooling.API_SPEC_LIB/43c948fb-024c-4176-a702-879840dedb82/paradiso-library/1.0.0"/>
 	<classpathentry kind="con" path="MULE_LIB/com.mulesoft.munit/munit-tools/3.4.0"/>

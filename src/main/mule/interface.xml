@@ -5,24 +5,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="get:\patients\(id):prc-patient-api-config" doc:id="739e936c-e476-454a-b2d9-958de25f559e" >
-		<ee:transform doc:name="Transform Message" doc:id="51e343b7-6187-467c-b88a-9ce8b7f9d336" >
-			<ee:variables >
-				<ee:set-variable variableName="id" ><![CDATA[attributes.uriParams.'id']]></ee:set-variable>
-			</ee:variables>
-		</ee:transform>
-		<ee:transform doc:name="Transform Message1" doc:id="5ddb1e97-35ab-4d2c-a622-3c4170d00e63" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-  correlationId: "fe5zef1-194b-475c-8dee-0zef56zf4180",
-  statusCode: 404,
-  namespace: "RESOURCE_NAME",
-  identifier: "NOT_FOUND",
-  description: "patient not found with id xxx"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
+		<set-variable value="#[attributes.uriParams.id]" doc:name="[patientId]" doc:id="98788ccf-1bec-46de-8bf3-58989453fa20" variableName="patientId"/>
+		<set-variable value="#[attributes.queryParams.role]" doc:name="[role]" doc:id="23c471d0-0ee2-465a-9563-67aa80f261a3" variableName="role"/>
+		<flow-ref doc:name="sub-get-patient" doc:id="70d4bea1-43eb-46f7-96d5-383fdaf60b17" name="sub-get-patient"/>
 	</flow>
 </mule>

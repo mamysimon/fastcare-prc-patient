@@ -4,8 +4,21 @@ autodiscoveryId: "000000"
 
 # Listener
 https:
-  port: "8081"
+  port: "8090"
 ################################
 
-system-name:
-  password: "${secure::system-name.password}"
+protocol: "HTTP"
+
+database:
+  host: "localhost"
+  port: "8080"
+  base-path: "/api/v1"
+  client-id: ""
+  client-secret: ""
+  
+sftp:
+  host: "localhost"
+  port: "8081"
+  base-path: "/api/v1"
+  client-id: ""
+  client-secret: ""
