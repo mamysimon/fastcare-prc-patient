@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+    <flow name="prc-patient-api-main" doc:id="25218e5d-3113-4813-a30f-61d01753942d">
+        <http:listener doc:name="/api/v1/*" doc:id="82a4027a-cb00-48f0-b6e1-c65fe2893f70" config-ref="prc-patient-api-httpListenerConfig" path="/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <set-variable value="#[import substringAfter, substringBefore from dw::core::Strings&#xA;&#xA;// Parse URI&#xA;var removeBasePathAndQP = substringAfter(attributes.requestUri, p('application.base-path'))&#xA;       then (&#xA;        if ($ contains &quot;?&quot;) substringBefore($, &quot;?&quot;)&#xA;        else $&#xA;       )&#xA;var requestName = &quot;$(attributes.method) $(removeBasePathAndQP)&quot;&#xA;&#xA;output application/json&#xA;---&#xA;{&#xA; correlationId: attributes.headers.'x-root-correlation-id' default correlationId,&#xA; flowId: uuid(),&#xA; startStep: &quot;Start $(requestName) flow&quot;,&#xA; endStep: &quot;Operation on $(requestName) completed successfully&quot;,&#xA; endpoint: removeBasePathAndQP&#xA;}]" doc:name="[metadata]" doc:id="e9aff2ff-7990-4159-84c1-c9e4c58b9b9e" variableName="metadata" />
+        <logger level="INFO" doc:name="Start" doc:id="362b27f3-416c-4719-a476-77c47c56e6d2" message="#[%dw 2.0&#xA;var params = attributes.queryParams ++ attributes.uriParams&#xA;output application/json&#xA;---&#xA;{&#xA;    step: vars.metadata.startStep,&#xA;    data: {&#xA;        business: params ++ {},&#xA;        technical: {&#xA;            flowId: vars.metadata.flowId,&#xA;            correlationId: vars.metadata.correlationId&#xA;        }&#xA;    }&#xA;}]" category="${app.name}" />
+        <choice doc:name="Choice" doc:id="be0be594-0214-413a-b8f5-1aebd0ba74ad">
+            <when expression="#[vars.metadata.endpoint == &quot;/heartbeat&quot;]">
+                <ee:transform doc:name="Heartbeat" doc:id="76f1154f-dca0-4cab-b4ba-ccc5cfc57ea6">
+                    <ee:message>
+                        <ee:set-payload resource="modules/Heartbeat.dwl" />
+                    </ee:message>
+                </ee:transform>
+            </when>
+            <otherwise>
+                <apikit:router doc:name="APIkit Router" doc:id="657fbe94-6722-4f7d-931c-0c1ca6155802" config-ref="prc-patient-api-config" />
+                <ee:transform doc:name="StandardResponse" doc:id="28b7f243-ffba-4725-9637-b63af32d1b84">
+                    <ee:message>
+                        <ee:set-payload resource="modules/StandardResponse.dwl" />
+                    </ee:message>
+                </ee:transform>
+            </otherwise>
+        </choice>
+        <logger level="INFO" doc:name="End" doc:id="11455ec0-6264-4825-9ad2-7512e8a87761" category="${app.name}" message="#[%dw 2.0&#xA;output application/json&#xA;---&#xA;{&#xA;    step: vars.metadata.endStep,&#xA;    data: {&#xA;        business: {},&#xA;        technical: payload - &quot;data&quot;&#xA;    }&#xA;}]" />
+    </flow>
+</mule>

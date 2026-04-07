@@ -1,0 +1,4 @@
+application:
+  name: "${artifactId}-${mule.env}"
+  version: "${version}"
+  base-path: "api/v1"

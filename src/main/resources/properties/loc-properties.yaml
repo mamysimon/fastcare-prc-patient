@@ -1,0 +1,11 @@
+################################
+# API Manager
+autodiscoveryId: "000000"
+
+# Listener
+https:
+  port: "8081"
+################################
+
+system-name:
+  password: "${secure::system-name.password}"
