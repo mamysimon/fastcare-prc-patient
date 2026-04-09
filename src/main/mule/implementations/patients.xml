@@ -7,10 +7,18 @@ http://www.mulesoft.org/schema/mule/database-system-api http://www.mulesoft.org/
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 http://www.mulesoft.org/schema/mule/sftp-system-api http://www.mulesoft.org/schema/mule/sftp-system-api/current/mule-sftp-system-api.xsd">
 	<sub-flow name="sub-get-patient" doc:id="677548d8-14fe-4d21-9774-87f5e38b0df9" >
-		<database-system-api:retrieve-patient doc:name="Retrieve [patient]" doc:id="a599ec0b-b747-4584-a6ef-20c3427063d4" config-ref="Database_System_API_Config" id="#[vars.patientId]" target="patient" targetValue="#[payload.data]"/>
-		<database-system-api:retrieve-medical-record doc:name="Retrieve patient [medicalRecord]" doc:id="56c78318-809e-4f7f-b8d7-81b6be1df133" config-ref="Database_System_API_Config" patient-id="#[vars.patientId]" target="medicalRecord" targetValue="#[payload.data]"/>
-		<sftp-system-api:retrieve-results_1 doc:name="Retrieve [laboratoryResults]" doc:id="0705fe6f-88ab-4c8c-a54c-a84c6c599899" config-ref="SFTP_System_API_Config" patient-id="#[vars.patientId]" target="laboratoryResults" targetValue="#[payload.data]" />
-		<sftp-system-api:retrieve-results_2 doc:name="Retrieve [radiologyResults]" doc:id="6591682d-49c2-4e47-a21b-b04671b485a2" config-ref="SFTP_System_API_Config" patient-id="#[vars.patientId]" target="radiologyResults" targetValue="#[payload.data]"/>
+		<database-system-api:retrieve-patient doc:name="Retrieve [patient]" doc:id="a599ec0b-b747-4584-a6ef-20c3427063d4" config-ref="Database_System_API_Config" id="#[vars.patientId]" target="patient" targetValue="#[payload.data]" />
+		<scatter-gather doc:name="Scatter-Gather" doc:id="b552cb92-22ff-428e-b5eb-8583fde04720" >
+			<route >
+				<database-system-api:retrieve-medical-record doc:name="Retrieve [medicalRecord]" doc:id="56c78318-809e-4f7f-b8d7-81b6be1df133" config-ref="Database_System_API_Config" patient-id="#[vars.patientId]" target="medicalRecord" targetValue="#[payload.data]" />
+			</route>
+			<route >
+				<sftp-system-api:retrieve-results_1 doc:name="Retrieve [laboratoryResults]" doc:id="0705fe6f-88ab-4c8c-a54c-a84c6c599899" config-ref="SFTP_System_API_Config" patient-id="#[vars.patientId]" target="laboratoryResults" targetValue="#[payload.data]" />
+			</route>
+			<route >
+				<sftp-system-api:retrieve-results_2 doc:name="Retrieve [radiologyResults]" doc:id="6591682d-49c2-4e47-a21b-b04671b485a2" config-ref="SFTP_System_API_Config" patient-id="#[vars.patientId]" target="radiologyResults" targetValue="#[payload.data]" />
+			</route>
+		</scatter-gather>
 		<ee:transform doc:name="Map to [patientDataModel]" doc:id="b01fbd38-67b6-449e-80f8-427e949ca662" >
 			<ee:message >
 			</ee:message>

@@ -1,0 +1,18 @@
+[
+  {
+    "examDate": "2026-04-02",
+    "examType": "Scanner",
+    "bodyPart": "Thorax",
+    "findings": "Légère opacité du lobe inférieur droit. Pas d'épanchement pleural.",
+    "urgency": "Medium",
+    "radiologist": "Dr. AMAR"
+  },
+  {
+    "examDate": "2026-04-05",
+    "examType": "IRM",
+    "bodyPart": "Cœur",
+    "findings": "Fraction d'éjection normale. Hypertrophie modérée du ventricule gauche.",
+    "urgency": "Low",
+    "radiologist": "Dr. AMAR"
+  }
+]

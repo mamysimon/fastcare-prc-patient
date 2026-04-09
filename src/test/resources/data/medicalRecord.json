@@ -1,0 +1,46 @@
+{
+  "consultations": [
+    {
+      "id": 21,
+      "createdAt": "2026-03-26T15:06:32.748536",
+      "patientReference": "FAC-10001",
+      "practitionerName": "Dr. MARTIN",
+      "visitDate": "2026-03-27T01:00:00",
+      "reasonForVisit": "Suivi bronchite",
+      "clinicalNotes": "Amélioration nette des symptômes. La fièvre est tombée. Fin du traitement antibiotique prévue dans 2 jours.",
+      "prescriptionsList": "Continuer Sirop Toplexil si besoin",
+      "bloodPressure": "125/80",
+      "temperature": 37.2
+    },
+    {
+      "id": 1,
+      "createdAt": "2026-03-26T15:03:01.960907",
+      "patientReference": "FAC-10001",
+      "practitionerName": "Dr. MARTIN",
+      "visitDate": "2026-03-20T11:30:00",
+      "reasonForVisit": "Toux grasse et fièvre",
+      "clinicalNotes": "Le patient présente des signes de bronchite aiguë. Râles crépitants à la base droite. Pas de détresse respiratoire.",
+      "prescriptionsList": "Amoxicilline, Sirop Toplexil",
+      "bloodPressure": "130/85",
+      "temperature": 38.5
+    }
+  ],
+  "allergies": [
+    {
+      "id": 1,
+      "createdAt": "2026-03-26T15:09:05.870383",
+      "patientReference": "FAC-10001",
+      "allergenType": "Medicinal",
+      "allergenName": "Pénicilline",
+      "severityLevel": "High"
+    },
+    {
+      "id": 11,
+      "createdAt": "2026-04-02T15:03:53.899934",
+      "patientReference": "FAC-10001",
+      "allergenType": "Medicinal",
+      "allergenName": "Paracétamol",
+      "severityLevel": "Low"
+    }
+  ]
+}
