@@ -1,9 +1,13 @@
 output application/json
+var actualError = if (error.errorType.identifier == "COMPOSITE_ROUTING") 
+                    (error.errorMessage.payload.failures pluck ($))[0] 
+                  else 
+                    error
 ---
 {
     correlationId: vars.metadata.correlationId,
     statusCode: vars.httpStatus,
-    namespace: error.errorMessage.payload.namespace default error.errorType.namespace,
-    identifier: error.errorMessage.payload.identifier default error.errorType.identifier,
-    description: vars.description default error.errorMessage.payload.description default error.description
+    namespace: actualError.errorMessage.payload.namespace default actualError.errorType.namespace,
+    identifier: actualError.errorMessage.payload.identifier default actualError.errorType.identifier,
+    description: vars.description default actualError.errorMessage.payload.description default actualError.description
 }

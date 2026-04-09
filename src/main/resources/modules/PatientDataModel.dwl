@@ -1,5 +1,4 @@
 %dw 2.0
-import * from dw::core::Strings
 output application/json
 
 var patient = vars.patient
@@ -56,7 +55,7 @@ fun gender(code): String = code match {
 		"resultValue": result.resultValue,
 		"unit": result.unit default "N/A",
 		"range": result.range default "N/A",
-		"interpretation": result.interpretation default "N/A",
+		"interpretation": result.status default "N/A",
 		"technician": result.labTechnician
 	}),
 	"radiologyResults": radiologyResults map ((result) -> {
