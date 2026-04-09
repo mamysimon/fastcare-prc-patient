@@ -132,7 +132,7 @@
 			<munit-tools:assert-equals doc:name="Payload should contain filtered patient data model for patient" doc:id="46c48c35-9fbc-4fda-a692-31d9b1997fbc" actual="#[payload]" expected='#[readUrl("classpath://data/patientDataModelForPatient.json", "application/json")]' message="Payload should contain filtered patient data model for patient"/>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="sub-patient-not-foundTest" doc:id="573c60b7-738c-4520-84f0-67dbc77ae8a0" description="Test" expectedErrorType="ANY">
+	<munit:test name="sub-patient-not-foundTest" doc:id="573c60b7-738c-4520-84f0-67dbc77ae8a0" description="Test">
 		<munit:behavior>
 			<munit-tools:mock-when doc:name="database-system-api:retrieve-patient" doc:id="812c2015-8865-4c18-91bb-29cd3132774d" processor="database-system-api:retrieve-patient" >
 				<munit-tools:with-attributes >
@@ -147,8 +147,23 @@
 		<munit:execution >
 			<set-variable value="FAC-11111" doc:name="[patientId]" doc:id="7dab2fb6-f4a6-4456-a078-3d9a07a6d1fd" variableName="patientId" />
 			<set-variable value="doctor" doc:name="[role]" doc:id="0ded95de-6953-4700-b33d-76d2ce548976" variableName="role" />
-			<flow-ref doc:name="Flow-ref to sub-get-patient" doc:id="2a71bd5c-5ad2-4442-95ed-a66306e9c383" name="sub-get-patient" />
+			<set-variable value="sub-get-patient" doc:name="[testedFlow]" doc:id="e0e27e62-76f0-415e-977c-dac2ad9cd827" variableName="testedFlow" />
+			<try doc:name="Try" doc:id="c5440237-dba4-4426-a28f-b0095980bb21" >
+				<flow-ref doc:name="apikit-mock" doc:id="2a71bd5c-5ad2-4442-95ed-a66306e9c383" name="apikit-mock" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="a9421447-f354-4011-a308-f46145b0c674" type="PATIENT:NOT_FOUND" />
+				</error-handler>
+			</try>
 		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Error description" doc:id="577df152-1a34-4ffd-9998-baed666909a8" actual="#[vars.httpStatus]" expected='#[404 as Number]' />
+			<munit-tools:verify-call doc:name="Last error logger" doc:id="baa2ab1b-d143-4358-aa98-60b01c74401e" processor="logger" times="1" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="ERROR" attributeName="level" />
+					<munit-tools:with-attribute whereValue="ERROR" attributeName="doc:name" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
 	</munit:test>
 
 
