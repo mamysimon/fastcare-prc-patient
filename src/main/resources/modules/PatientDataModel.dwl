@@ -1,4 +1,5 @@
 %dw 2.0
+import * from dw::core::Strings
 output application/json
 
 var patient = vars.patient
@@ -17,7 +18,7 @@ fun gender(code): String = code match {
 {
 	"id": patient.externalId,
 	"firstname": splitBy(patient.fullName, " ")[0],
-	"lastname": splitBy(patient.fullName, " ")[1],
+	"lastname": capitalize(splitBy(patient.fullName, " ")[1]),
 	"gender": gender(patient.genderCode),
 	"birthDate": patient.dobRow as Date,
 	"phoneNumber": patient.phoneNumber,
