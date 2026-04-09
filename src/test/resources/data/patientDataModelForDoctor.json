@@ -1,0 +1,97 @@
+{
+        "id": "FAC-10001",
+        "firstname": "Jean-Luc",
+        "lastname": "PICARD",
+        "gender": "male",
+        "birthDate": "1985-07-13",
+        "phoneNumber": "+33611223344",
+        "email": "mamypsimon@gmail.com",
+        "postalAddress": "15 Rue de la Fédération, 75015 PARIS",
+        "emergencyContact": {
+            "firstname": "Marie",
+            "lastname": "Picard",
+            "phoneNumber": "+33611223300",
+            "relation": "Épouse"
+        },
+        "insurance": {
+            "name": "CPAM",
+            "number": "1850775011"
+        },
+        "medicalRecord": {
+            "history": [
+                {
+                    "date": "2026-03-27",
+                    "practitioner": "Dr. MARTIN",
+                    "reasonForVisit": "Suivi bronchite",
+                    "clinicalNotes": "Amélioration nette des symptômes. La fièvre est tombée. Fin du traitement antibiotique prévue dans 2 jours.",
+                    "prescriptions": [
+                        "Continuer Sirop Toplexil si besoin"
+                    ],
+                    "bloodPressure": "125/80",
+                    "temperature": "37.2 °C"
+                },
+                {
+                    "date": "2026-03-20",
+                    "practitioner": "Dr. MARTIN",
+                    "reasonForVisit": "Toux grasse et fièvre",
+                    "clinicalNotes": "Le patient présente des signes de bronchite aiguë. Râles crépitants à la base droite. Pas de détresse respiratoire.",
+                    "prescriptions": [
+                        "Amoxicilline",
+                        "Sirop Toplexil"
+                    ],
+                    "bloodPressure": "130/85",
+                    "temperature": "38.5 °C"
+                }
+            ],
+            "allergies": [
+                {
+                    "type": "Medicinal",
+                    "name": "Pénicilline",
+                    "severity": "High"
+                },
+                {
+                    "type": "Medicinal",
+                    "name": "Paracétamol",
+                    "severity": "Low"
+                }
+            ]
+        },
+        "laboratoryResults": [
+            {
+                "date": "2026-03-20",
+                "testName": "NFS - Globules Blancs",
+                "resultValue": "12500",
+                "unit": "/mm3",
+                "range": "4000-10000",
+                "interpretation": "High",
+                "technician": "Dr. VIGIER"
+            },
+            {
+                "date": "2026-03-20",
+                "testName": "CRP (Protéine C Réactive)",
+                "resultValue": "45",
+                "unit": "mg/L",
+                "range": "<5",
+                "interpretation": "High",
+                "technician": "Dr. VIGIER"
+            }
+        ],
+        "radiologyResults": [
+            {
+                "date": "2026-04-02",
+                "examType": "Scanner",
+                "bodyPart": "Thorax",
+                "findings": "Légère opacité du lobe inférieur droit. Pas d'épanchement pleural.",
+                "urgency": "Medium",
+                "radiologist": "Dr. AMAR"
+            },
+            {
+                "date": "2026-04-05",
+                "examType": "IRM",
+                "bodyPart": "Cœur",
+                "findings": "Fraction d'éjection normale. Hypertrophie modérée du ventricule gauche.",
+                "urgency": "Low",
+                "radiologist": "Dr. AMAR"
+            }
+        ]
+    }

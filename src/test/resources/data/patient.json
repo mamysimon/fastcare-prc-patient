@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "createdAt": "2026-03-26T14:58:10.39883",
+  "externalId": "FAC-10001",
+  "fullName": "Jean-Luc PICARD",
+  "genderCode": "M",
+  "dobRow": "1985-07-13",
+  "phoneNumber": "+33611223344",
+  "emailAddress": "mamypsimon@gmail.com",
+  "addressLine": "15 Rue de la Fédération",
+  "zipCode": "75015",
+  "city": "PARIS",
+  "insuranceName": "CPAM",
+  "insuranceNumber": "1850775011",
+  "emergencyContactFullName": "Marie Picard",
+  "emergencyContactNumber": "0611223300",
+  "emergencyContactRelation": "Épouse",
+  "googleRefreshToken": null
+}

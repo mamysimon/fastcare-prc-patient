@@ -8,11 +8,11 @@ if(vars.role == "patient")
 	        "bloodPressure",
 	        "temperature"
 	    ])
-		case .laboratoryResults -> $ map (result) -> (result -- [
-			"technician",
-			"urgency"
+		case .laboratoryResults -> $ map (result) -> result - "technician"
+		case .radiologyResults -> $ map (result) -> (result -- [
+			"urgency",
+			"radiologist"
 		])
-		case .radiologyResults -> $ map (result) -> result - "radiologist"
 	}
 else
 	vars.patientDataModel
