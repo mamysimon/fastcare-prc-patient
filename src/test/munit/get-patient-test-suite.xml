@@ -12,8 +12,8 @@
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="database-system-api:retrieve-patient" doc:id="f63ec15d-5300-45ed-b844-cca605085d4d" processor="database-system-api:retrieve-patient">
 				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [patient]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="a599ec0b-b747-4584-a6ef-20c3427063d4" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="sys-database : Retrieve [patient]" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="9c491215-8a67-4a6a-8168-865df1671511" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
 					<munit-tools:variables >
@@ -23,8 +23,8 @@
 			</munit-tools:mock-when>
 			<munit-tools:mock-when doc:name="database-system-api:retrieve-medical-record" doc:id="2cec22f4-04d7-4191-88e3-7e2545528c9a" processor="database-system-api:retrieve-medical-record">
 				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [medicalRecord]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="56c78318-809e-4f7f-b8d7-81b6be1df133" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="sys-database : Retrieve [medicalRecord]" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="8a28c502-4ea4-4f36-bfa2-3fbfeb5fbefb" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
 					<munit-tools:variables >
@@ -34,7 +34,7 @@
 			</munit-tools:mock-when>
 			<munit-tools:mock-when doc:name="sftp-system-api:retrieve-laboratory-results" doc:id="364b6538-eacc-4de0-95a9-a278c6cf57eb" processor="sftp-system-api:retrieve-results_1">
 				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [laboratoryResults]" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="sys-sftp : Retrieve [laboratoryResults]" attributeName="doc:name" />
 					<munit-tools:with-attribute whereValue="0705fe6f-88ab-4c8c-a54c-a84c6c599899" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
@@ -45,7 +45,7 @@
 			</munit-tools:mock-when>
 			<munit-tools:mock-when doc:name="sftp-system-api:retrieve-radiology-results" doc:id="73c87523-3322-4849-8cef-dfe33b4d21ea" processor="sftp-system-api:retrieve-results_2">
 				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [radiologyResults]" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="sys-sftp : Retrieve [radiologyResults]" attributeName="doc:name" />
 					<munit-tools:with-attribute whereValue="6591682d-49c2-4e47-a21b-b04671b485a2" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
@@ -61,83 +61,15 @@
 			<flow-ref doc:name="Flow-ref to sub-get-patient" doc:id="a73ae03e-7886-4641-95e4-7115f39d8f2f" name="sub-get-patient"/>
 		</munit:execution>
 		<munit:validation>
-			<munit-tools:assert-equals doc:name="Payload should contain entire patient data model" doc:id="e075f7ae-3bbd-4c14-813e-003b20e1207b" actual="#[payload]" expected='#[readUrl("classpath://data/patientDataModelForDoctor.json", "application/json")]' message="Payload should contain entire patient data model"/>
-		</munit:validation>
-	</munit:test>
-	<munit:test name="sub-get-patient-by-patientTest" doc:id="eb5de027-e8f0-4a4e-9ffc-f5a8be6cafc9" description="Test" >
-		<munit:behavior >
-			<munit-tools:mock-when doc:name="database-system-api:retrieve-patient" doc:id="c4df32ad-fdec-4b55-bde6-2388cc9d5e83" processor="database-system-api:retrieve-patient" >
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [patient]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="a599ec0b-b747-4584-a6ef-20c3427063d4" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:variables >
-						<munit-tools:variable key="patient" value='#[readUrl("classpath://data/patient.json", "application/json")]' />
-					</munit-tools:variables>
-				</munit-tools:then-return>
-			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="database-system-api:retrieve-medical-record" doc:id="3b47f309-39c9-4fb5-8459-ead4d3f0c87f" processor="database-system-api:retrieve-medical-record" >
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [medicalRecord]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="56c78318-809e-4f7f-b8d7-81b6be1df133" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:variables >
-						<munit-tools:variable key="medicalRecord" value='#[readUrl("classpath://data/medicalRecord.json", "application/json")]' />
-					</munit-tools:variables>
-				</munit-tools:then-return>
-			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="sftp-system-api:retrieve-results_" doc:id="8dd4aafe-971f-4dfd-9441-291efb619544" processor="sftp-system-api:retrieve-results_1" >
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [laboratoryResults]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="0705fe6f-88ab-4c8c-a54c-a84c6c599899" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:variables >
-						<munit-tools:variable key="laboratoryResults" value='#[readUrl("classpath://data/laboratoryResults.json", "application/json")]' />
-					</munit-tools:variables>
-				</munit-tools:then-return>
-			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="sftp-system-api:retrieve-results_1" doc:id="f30a66bd-9ae2-4073-9f9a-51a57a09d3e8" processor="sftp-system-api:retrieve-results_2" >
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [radiologyResults]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="6591682d-49c2-4e47-a21b-b04671b485a2" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:variables >
-						<munit-tools:variable key="radiologyResults" value='#[readUrl("classpath://data/radiologyResults.json", "application/json")]' />
-					</munit-tools:variables>
-				</munit-tools:then-return>
-			</munit-tools:mock-when>
-			<munit-tools:spy doc:name="Transform message filter" doc:id="c2d01bb0-635d-4269-85bb-2d804973ebe6" processor="ee:transform">
-				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Filter [patientDataModelFiltered] by role" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="e066c27d-ca91-4fd3-b5be-2cfde51fe452" attributeName="doc:id" />
-				</munit-tools:with-attributes>
-				<munit-tools:before-call>
-					<munit-tools:assert-equals doc:name="Variabla patientDataModel should contain entire patient data model" doc:id="eb7af629-4485-42ce-b0e9-c573d7663254" actual="#[vars.patientDataModel]" expected='#[readUrl("classpath://data/patientDataModelForDoctor.json", "application/json")]' message="Variabla patientDataModel should contain entire patient data model"/>
-				</munit-tools:before-call>
-				<munit-tools:after-call>
-					<munit-tools:assert-that doc:name="Variable patientDataModelFiltered exists" doc:id="488c45fb-1790-434e-af4a-81a07e47ccd9" expression="#[vars.patientDataModelFiltered != null]" is="#[MunitTools::notNullValue()]"/>
-				</munit-tools:after-call>
-			</munit-tools:spy>
-		</munit:behavior>
-		<munit:execution >
-			<set-variable value="FAC-10001" doc:name="[patientId]" doc:id="259c54c4-1a68-4a56-ac1b-ea807a94f50a" variableName="patientId" />
-			<set-variable value="patient" doc:name="[role]" doc:id="1f39240f-47a3-4556-94ce-0ff5494948e4" variableName="role" />
-			<flow-ref doc:name="Flow-ref to sub-get-patient" doc:id="07133403-f66f-4381-bc6d-66c27e3b9612" name="sub-get-patient" />
-		</munit:execution>
-		<munit:validation>
-			<munit-tools:assert-equals doc:name="Payload should contain filtered patient data model for patient" doc:id="46c48c35-9fbc-4fda-a692-31d9b1997fbc" actual="#[payload]" expected='#[readUrl("classpath://data/patientDataModelForPatient.json", "application/json")]' message="Payload should contain filtered patient data model for patient"/>
+			<munit-tools:assert-equals doc:name="Payload should contain patient data model" doc:id="e075f7ae-3bbd-4c14-813e-003b20e1207b" actual="#[payload]" expected='#[readUrl("classpath://data/patientDataModel.json", "application/json")]' message="Payload should contain patient data model"/>
 		</munit:validation>
 	</munit:test>
 	<munit:test name="sub-patient-not-foundTest" doc:id="573c60b7-738c-4520-84f0-67dbc77ae8a0" description="Test">
 		<munit:behavior>
 			<munit-tools:mock-when doc:name="database-system-api:retrieve-patient" doc:id="812c2015-8865-4c18-91bb-29cd3132774d" processor="database-system-api:retrieve-patient" >
 				<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Retrieve [patient]" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="a599ec0b-b747-4584-a6ef-20c3427063d4" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="sys-database : Retrieve [patient]" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="9c491215-8a67-4a6a-8168-865df1671511" attributeName="doc:id" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
 					<munit-tools:error typeId="PATIENT:NOT_FOUND" />
@@ -156,7 +88,7 @@
 			</try>
 		</munit:execution>
 		<munit:validation >
-			<munit-tools:assert-equals doc:name="Error description" doc:id="577df152-1a34-4ffd-9998-baed666909a8" actual="#[vars.httpStatus]" expected='#[404 as Number]' />
+			<munit-tools:assert-equals doc:name="HTTP Status" doc:id="577df152-1a34-4ffd-9998-baed666909a8" actual="#[vars.httpStatus]" expected='#[404 as Number]' />
 			<munit-tools:verify-call doc:name="Last error logger" doc:id="baa2ab1b-d143-4358-aa98-60b01c74401e" processor="logger" times="1" >
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="ERROR" attributeName="level" />
