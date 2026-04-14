@@ -57,7 +57,6 @@
 		</munit:behavior>
 		<munit:execution >
 			<set-variable value="FAC-10001" doc:name="[patientId]" doc:id="46220182-1aff-4b37-92ef-5040bd9df536" variableName="patientId" />
-			<set-variable value="doctor" doc:name="[role]" doc:id="496da5f3-5721-4abf-8ef9-9a5d0eedd050" variableName="role" />
 			<flow-ref doc:name="Flow-ref to sub-get-patient" doc:id="a73ae03e-7886-4641-95e4-7115f39d8f2f" name="sub-get-patient"/>
 		</munit:execution>
 		<munit:validation>
@@ -78,7 +77,6 @@
 		</munit:behavior>
 		<munit:execution >
 			<set-variable value="FAC-11111" doc:name="[patientId]" doc:id="7dab2fb6-f4a6-4456-a078-3d9a07a6d1fd" variableName="patientId" />
-			<set-variable value="doctor" doc:name="[role]" doc:id="0ded95de-6953-4700-b33d-76d2ce548976" variableName="role" />
 			<set-variable value="sub-get-patient" doc:name="[testedFlow]" doc:id="e0e27e62-76f0-415e-977c-dac2ad9cd827" variableName="testedFlow" />
 			<try doc:name="Try" doc:id="c5440237-dba4-4426-a28f-b0095980bb21" >
 				<flow-ref doc:name="apikit-mock" doc:id="2a71bd5c-5ad2-4442-95ed-a66306e9c383" name="apikit-mock" />
